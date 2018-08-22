@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
+import routes from './routes';
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      message: 'Waiting for response from rails...'
-    }
-  }
+  renderRoute = (routeKey, i) => {
+    const route = routes[routeKey];
 
-  componentDidMount() {
-    fetch("http://localhost:8000/hello-world")
-      .then(response => response.json())
-      .then(response => {
-        this.setState({
-          message: response.message
-        })
-      })
+    const props = {
+      key: i,
+      path: route.path,
+      component: route.component,
+      exact: true,
+    };
+
+    return <Route {...props} />;
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          {this.state.message}
-        </p>
+      <div className='main container' role="main">
+        <Switch>
+          {
+            Object.keys(routes).map((routeKey, i) => this.renderRoute(routeKey, i))
+          }
+        </Switch>
       </div>
     );
   }
