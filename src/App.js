@@ -3,6 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      message: 'Waiting for response from rails...'
+    }
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8000/hello-world")
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          message: response.message
+        })
+      })
+  }
+
   render() {
     return (
       <div className="App">
@@ -11,7 +28,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.state.message}
         </p>
       </div>
     );
