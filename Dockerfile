@@ -6,7 +6,7 @@ RUN mkdir /webapp
 WORKDIR /webapp
 
 # add `/webapp/node_modules/.bin` to $PATH
-ENV PATH /webapp/node_modules/.bin:$PATH
+# ENV PATH /webapp/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY package.json /webapp/package.json
