@@ -25,6 +25,8 @@ class App extends Component {
             Object.keys(routes).map((routeKey, i) => this.renderRoute(routeKey, i))
           }
         </Switch>
+        <a href='./login'>Log In</a> | 
+        <a href='./signup'> Sign Up</a>
       </div>
     );
   }
